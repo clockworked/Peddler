@@ -11,6 +11,7 @@ public class Game extends JFrame {
   public final int WIDTH=800, HEIGHT=600;
   private Map map;
   private MapMenu mapMenu;
+  private TraderMenu traderMenu;
   private JPanel activePanel;
   private HashMap<String, JPanel> panels;
   
@@ -24,6 +25,8 @@ public class Game extends JFrame {
     panels = new HashMap<String, JPanel>();
     map = new Map(this);
     mapMenu = new MapMenu(this, map);
+    traderMenu = new TraderMenu(this);
+    addPanel("Trader",traderMenu);
     panels.put("Map", mapMenu);
     setActivePanel("Map");
     addWindowListener(new WindowAdapter() {

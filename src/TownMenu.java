@@ -13,9 +13,11 @@ public class TownMenu extends JPanel {
   private Game game;
   private Town town;
   private JMenuBar menuBar;
+  private TraderMenu traderMenu;
   private JButton backButton;
   private JButton tavernButton;
   private JButton traderButton;
+  
   public TownMenu(Game game, Town town) {
     this.game = game;
     this.town = town;
@@ -44,7 +46,7 @@ public class TownMenu extends JPanel {
     traderButton.addActionListener(
       new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-          System.out.println("trader...");//showMap();
+        showTrader();
         }
       }
     );
@@ -54,4 +56,7 @@ public class TownMenu extends JPanel {
     game.setActivePanel("Map");
   }
   
+  public void showTrader() {
+	game.setActivePanel("Trader");
+  }
 }
