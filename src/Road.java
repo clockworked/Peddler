@@ -1,4 +1,3 @@
-package peddler;
 
 public class Road {
   public Town t1, t2;

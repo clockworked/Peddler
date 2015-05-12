@@ -1,4 +1,3 @@
-package peddler;
 
 import java.awt.Point;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package peddler;
+
 
 public class Commodity {
   private String name;

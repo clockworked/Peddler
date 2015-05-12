@@ -1,4 +1,3 @@
-package peddler;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -14,6 +13,7 @@ public class Game extends JFrame {
   private MapMenu mapMenu;
   private JPanel activePanel;
   private HashMap<String, JPanel> panels;
+  
   public static void main(String[] args) {
     Game me = new Game();
   }

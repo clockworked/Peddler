@@ -1,4 +1,3 @@
-package peddler;
 
 import java.awt.BasicStroke;
 import java.awt.Graphics;

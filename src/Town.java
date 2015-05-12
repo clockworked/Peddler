@@ -1,4 +1,3 @@
-package peddler;
 
 public class Town {
   public String name;
