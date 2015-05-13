@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 public class Game extends JFrame {
   public final int WIDTH=800, HEIGHT=600;
+  private Player player;
   private Map map;
   private MapMenu mapMenu;
   private TraderMenu traderMenu;
@@ -26,6 +27,9 @@ public class Game extends JFrame {
     map = new Map(this);
     mapMenu = new MapMenu(this, map);
     traderMenu = new TraderMenu(this);
+    // TODO: make "New Game" Feature that asks for player name.
+    playerCreation();
+    
     addPanel("Trader",traderMenu);
     panels.put("Map", mapMenu);
     setActivePanel("Map");
@@ -34,7 +38,19 @@ public class Game extends JFrame {
     });
   }
   
-  public void setActivePanel(String key) {
+  // Creates the Player Character. Currently using for testing inventory
+  private void playerCreation() {
+	  player = new Player("JackJohn");
+	  Commodity potatoes = new Commodity("Potatoes",15);
+	  player.addStack(new ItemStack(potatoes,100,"Average"));
+	
+}
+  
+  public Player getPlayer(){
+	  return this.player;
+  }
+
+public void setActivePanel(String key) {
     if (activePanel != null) {
       getContentPane().remove(activePanel);
     }
@@ -46,5 +62,12 @@ public class Game extends JFrame {
   
   public void addPanel(String key, JPanel panel) {
     panels.put(key, panel);
+  }
+
+  // Before we transition to the trader window, prepare the inventory and the trader to display
+  public void setTrader(){		// TODO: Add trader so we can access their inventory.
+  this.traderMenu.setPlayerInventory(player);
+		
+		
   }
 }

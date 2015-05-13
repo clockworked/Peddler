@@ -17,10 +17,13 @@ public class TownMenu extends JPanel {
   private JButton backButton;
   private JButton tavernButton;
   private JButton traderButton;
+  private Player player;
   
+
   public TownMenu(Game game, Town town) {
     this.game = game;
     this.town = town;
+    player = game.getPlayer();
     setAlignmentX(CENTER_ALIGNMENT);
     setPreferredSize(new Dimension(game.WIDTH, game.HEIGHT));
     add(new JLabel(town.name));
@@ -57,6 +60,9 @@ public class TownMenu extends JPanel {
   }
   
   public void showTrader() {
+	game.setTrader();
 	game.setActivePanel("Trader");
   }
+  
+
 }

@@ -1,13 +1,22 @@
+import java.util.ArrayList;
+
 // Character Class will keep name, location, and inventory information for NPCS and the PC.
 
 public class Character {
-	private Commodity[] inventory;
-	private String name;
+	private ArrayList<ItemStack> inventory;
+	public String name;
 	
 	public Character(String Name){
 		this.name = Name;
-		inventory = new Commodity[50];
-		
+		inventory = new ArrayList<ItemStack>();
+	}
+	
+	public ArrayList<ItemStack> getInventory() {
+		return inventory;
+	}
+	
+	public void addStack(ItemStack i){
+		inventory.add(i);
 	}
 
 }

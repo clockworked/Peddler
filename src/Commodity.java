@@ -6,10 +6,6 @@ public class Commodity {
   private int minPrice, maxPrice;
   private final double DEFAULT_MIN_MULTIPLIER = 0.25;
   private final double DEFAULT_MAX_MULTIPLIER = 3.00;
-  // Quantity for inventory management
-  private int quantity;
-  // Quality for perception skilling later on? GOOD, AVERAGE, LOW
-  private String quality;
   // Weight for calculating inventory space
   private int weight;
   
@@ -18,8 +14,7 @@ public class Commodity {
     this.basePrice = basePrice;
     this.minPrice = (int)(basePrice*DEFAULT_MIN_MULTIPLIER);
     this.maxPrice = (int)(basePrice*DEFAULT_MAX_MULTIPLIER);
-    this.quantity = 0;
-    this.quality = "Average";
+
   }
   
   public int getBase(){
@@ -34,16 +29,12 @@ public class Commodity {
 	  return this.maxPrice;
   }
   
-  public int getQuantity(){
-	  return this.quantity;
-  }
-  
-  public String getQuality(){
-	  return this.quality;
-  }
-  
   public int getWeight(){
 	  return this.weight;
+  }
+  
+  public String getName(){
+	  return this.name;
   }
   
 }
