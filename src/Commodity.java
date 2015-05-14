@@ -1,5 +1,3 @@
-
-
 public class Commodity {
   private String name;
   private int basePrice;

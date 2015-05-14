@@ -1,7 +1,5 @@
-
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JFrame;
@@ -39,18 +37,17 @@ public class Game extends JFrame {
   }
   
   // Creates the Player Character. Currently using for testing inventory
-  private void playerCreation() {
+  public void playerCreation() {
 	  player = new Player("JackJohn");
-	  Commodity potatoes = new Commodity("Potatoes",15);
-	  player.addStack(new ItemStack(potatoes,100,"Average"));
-	
-}
+	  Commodity potatoes = new Commodity("Potatoes", 15);
+	  player.addStack(new ItemStack(potatoes, 100, "Average"));
+  }
   
   public Player getPlayer(){
 	  return this.player;
   }
 
-public void setActivePanel(String key) {
+  public void setActivePanel(String key) {
     if (activePanel != null) {
       getContentPane().remove(activePanel);
     }
@@ -65,9 +62,8 @@ public void setActivePanel(String key) {
   }
 
   // Before we transition to the trader window, prepare the inventory and the trader to display
-  public void setTrader(){		// TODO: Add trader so we can access their inventory.
-  this.traderMenu.setPlayerInventory(player);
-		
-		
+  public void setTrader() {
+    // TODO: Add trader so we can access their inventory.
+    this.traderMenu.setPlayerInventory(player);		
   }
 }

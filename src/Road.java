@@ -1,4 +1,3 @@
-
 public class Road {
   public Town t1, t2;
   public Road(Town t1, Town t2) {
