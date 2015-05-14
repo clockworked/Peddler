@@ -1,4 +1,3 @@
-
 public class ItemStack {
 	private Commodity type;
 	private int quantity;
@@ -29,6 +28,4 @@ public class ItemStack {
 	public int getPrice(){
 		return this.type.getBase();
 	}
-	
-
 }

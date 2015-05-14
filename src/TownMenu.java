@@ -1,11 +1,9 @@
-
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
@@ -49,7 +47,7 @@ public class TownMenu extends JPanel {
     traderButton.addActionListener(
       new ActionListener() {
         public void actionPerformed(ActionEvent e) {
-        showTrader();
+          showTrader();
         }
       }
     );
@@ -60,9 +58,7 @@ public class TownMenu extends JPanel {
   }
   
   public void showTrader() {
-	game.setTrader();
-	game.setActivePanel("Trader");
+	  game.setTrader();
+	  game.setActivePanel("Trader");
   }
-  
-
 }
