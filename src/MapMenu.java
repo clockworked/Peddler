@@ -31,8 +31,8 @@ public class MapMenu extends JPanel implements ActionListener {
     townsGrid.setLayout(new GridBagLayout());
     townsGrid.setOpaque(false);
     add(townsGrid);
-    for (Point p : map.towns.keySet()) {
-      Town t = map.towns.get(p);
+    for (Point p : map.townsByLocation.keySet()) {
+      Town t = map.townsByLocation.get(p);
       JButton b = new JButton();
       b.setActionCommand(t.name);
       Icon nodeIcon = new ImageIcon("node.png");

@@ -6,4 +6,7 @@ public class Town {
     this.x = x;
     this.y = y;
   }
+  public String toString() {
+    return name;
+  }
 }
