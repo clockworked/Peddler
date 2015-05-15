@@ -13,6 +13,7 @@ public class Game extends JFrame {
   private TraderMenu traderMenu;
   private JPanel activePanel;
   private HashMap<String, JPanel> panels;
+  private TestTown currentTown;					// Currently selected Town
   
   public static void main(String[] args) {
     Game me = new Game();
@@ -25,9 +26,9 @@ public class Game extends JFrame {
     map = new Map(this);
     mapMenu = new MapMenu(this, map);
     traderMenu = new TraderMenu(this);
+	this.currentTown = new TestTown();			// For testing purposes, we're always in the same town.
     // TODO: make "New Game" Feature that asks for player name.
     playerCreation();
-    
     addPanel("Trader",traderMenu);
     panels.put("Map", mapMenu);
     setActivePanel("Map");
@@ -41,6 +42,8 @@ public class Game extends JFrame {
 	  player = new Player("JackJohn");
 	  Commodity potatoes = new Commodity("Potatoes", 15);
 	  player.addStack(new ItemStack(potatoes, 100, "Average"));
+	  Commodity furs = new Commodity("Furs", 50);
+	  player.addStack(new ItemStack(potatoes, 35, "Good"));
   }
   
   public Player getPlayer(){
@@ -65,5 +68,6 @@ public class Game extends JFrame {
   public void setTrader() {
     // TODO: Add trader so we can access their inventory.
     this.traderMenu.setPlayerInventory(player);		
+    this.traderMenu.setTraderInventory(currentTown.getTrader());
   }
 }
