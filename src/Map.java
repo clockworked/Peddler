@@ -8,19 +8,22 @@ public class Map {
   public ArrayList<Town> towns;
   public ArrayList<Road> roads;
   private final int NUM_TOWNS = 6;
-  private final int WIDTH = 6, HEIGHT = 6;
+  private final int DEFAULT_WIDTH = 6, DEFAULT_HEIGHT = 6;
+  public int width, height;
   private Random RNG;
   public Map(Game game) {
     RNG = new Random();
     towns = new ArrayList<Town>();
     roads = new ArrayList<Road>();
+    width = DEFAULT_WIDTH;
+    height = DEFAULT_HEIGHT;
     townsByLocation = new Hashtable<Point, Town>();
     for (int i=1; i<=NUM_TOWNS; i++) {
       Point p=new Point();
       Town t=null;
       do {
-        p.x = RNG.nextInt(WIDTH);
-        p.y = RNG.nextInt(HEIGHT);
+        p.x = RNG.nextInt(width);
+        p.y = RNG.nextInt(height);
         t = new Town(String.format("Town %d", i), p.x, p.y);
       } while (townsByLocation.containsKey(p));
       towns.add(t);
