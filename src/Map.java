@@ -28,6 +28,7 @@ public class Map {
       } while (townsByLocation.containsKey(p));
       towns.add(t);
       townsByLocation.put(p, t);
+      game.addPanel(t.name, new TownMenu(game, t));
     }
 
     for (Point p : townsByLocation.keySet()) {
