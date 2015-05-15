@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -39,12 +40,12 @@ public class MapMenu extends JPanel implements ActionListener {
         townsGrid.tiles[x][y] = tile;
         tile.setOpaque(false);
         //tile.setBackground(new Color(192,192,192,255));
-        //tile.setBorder(BorderFactory.createLineBorder(new Color(128,128,128,255)));
+        tile.setBorder(BorderFactory.createLineBorder(new Color(0,0,0,255)));
         tile.setAlignmentX(CENTER_ALIGNMENT);
         tile.setAlignmentY(CENTER_ALIGNMENT);
+        tile.setLayout(new BorderLayout());
         tile.setVisible(true);
         townsGrid.add(tile);
-        //tile.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0,0,0,64)));
       }
     }
     townsGrid.setOpaque(false);
@@ -59,7 +60,7 @@ public class MapMenu extends JPanel implements ActionListener {
       b.setBackground(new Color(0,0,0,0));
       b.setBorder(null);
       b.addActionListener(this);
-      townsGrid.tiles[p.x][p.y].add(b);
+      townsGrid.tiles[p.x][p.y].add(b, BorderLayout.CENTER);
       //System.out.printf("%s (%d %d)\n", t.name, p.x, p.y);
       townButtons.put(t, b);
     }
