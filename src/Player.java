@@ -5,6 +5,4 @@ public class Player extends Character {
 		super(Name);
 	}
 
-	
-
 }

@@ -1,7 +1,7 @@
 public class ItemStack {
 	private Commodity type;
 	private int quantity;
-	private String quality;		// GOOD, AVERAGE, LOW. Currently unsure of how this will work when adding new items... take lowest quality?
+	private String quality;		// GOOD, AVERAGE, POOR. Currently unsure of how this will work when adding new items... take lowest quality?
 
 	public ItemStack(Commodity t, int c, String q) {
 		this.type = t;
