@@ -7,8 +7,8 @@ public class Map {
   public Hashtable<Point, Town> townsByLocation;
   public ArrayList<Town> towns;
   public ArrayList<Road> roads;
-  private final int NUM_TOWNS = 6;
-  private final int DEFAULT_WIDTH = 6, DEFAULT_HEIGHT = 6;
+  private final int NUM_TOWNS = 4;
+  private final int DEFAULT_WIDTH = 10, DEFAULT_HEIGHT = 7;
   public int width, height;
   private Random RNG;
   public Map(Game game) {
@@ -31,27 +31,43 @@ public class Map {
       game.addPanel(t.name, new TownMenu(game, t));
     }
 
-    for (Point p : townsByLocation.keySet()) {
-      Town t1 = townsByLocation.get(p);
-      int numConnections = RNG.nextInt(NUM_TOWNS - 1) + 1;
-      int i=0;
-      while (i < numConnections) {
-        Town t2 = towns.get(RNG.nextInt(NUM_TOWNS));
-        Road r = new Road(t1, t2);
-        if (!(t1==t2) && !roads.contains(r)) {
-          roads.add(r);
-          for (Road r2: roads) {
-            if (r != r2 && r.intersects(r2)) {
-              if (r.t1 != r2.t1 && r.t1 != r2.t2 && r.t2 != r2.t1 && r.t2 != r2.t2) {
-                //System.out.printf("%s->%s, %s->%s\n", r.t1, r.t2, r2.t1, r2.t2);
-              }
-            } else if (r != r2 && !(r.intersects(r2))) {
-              //System.out.printf("%s->%s, %s->%s\n", r.t1, r.t2, r2.t1, r2.t2);
+    addRoads();
+  }
+  public void addRoads() {
+    double roadChance = 1;
+    ArrayList<Town> connectedNodes = new ArrayList<Town>();
+    connectedNodes.add(towns.get(RNG.nextInt(towns.size())));
+    for (Town t1 : towns) {
+      for (Town t2: towns) {
+        if (t1 != t2) { 
+          Road r = new Road(t1, t2);
+          boolean roadExists = false;
+          for (Road r2 : roads) {
+            if (r.equals(r2)) {
+              roadExists = true;
+              break;
             }
           }
-          i++;
+          if (!roadExists) {
+            boolean crossesRoad = false;
+            for (Road r2: roads) {
+              if (!r.sharesEndpoint(r2)) {// && r.intersects(r2)) {
+                crossesRoad = true;
+              }
+            }
+            if (RNG.nextDouble() < roadChance) {
+              roads.add(r);
+              if (connectedNodes.contains(t2) && !connectedNodes.contains(t1)) {
+                connectedNodes.add(t1);
+              }
+              if (connectedNodes.contains(t1) && !connectedNodes.contains(t2)) { 
+                connectedNodes.add(t2);
+              }
+            }
+          }
         }
       }
+      if (!connectedNodes.contains(t1)) System.out.println(t1);
     }
   }
 }
