@@ -23,10 +23,10 @@ public class Game extends JFrame {
     setSize(WIDTH, HEIGHT);
     setVisible(true);
     panels = new HashMap<String, JPanel>();
+	this.currentTown = new TestTown();			// For testing purposes, we're always in the same town.
     map = new Map(this);
     mapMenu = new MapMenu(this, map);
     traderMenu = new TraderMenu(this);
-	this.currentTown = new TestTown();			// For testing purposes, we're always in the same town.
     // TODO: make "New Game" Feature that asks for player name.
     playerCreation();
     addPanel("Trader",traderMenu);
@@ -48,6 +48,10 @@ public class Game extends JFrame {
   
   public Player getPlayer(){
 	  return this.player;
+  }
+  
+  public TestTown getCurrentTown(){
+	  return this.currentTown;
   }
 
   public void setActivePanel(String key) {

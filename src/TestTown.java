@@ -12,6 +12,10 @@ public class TestTown {
 		createTrader();
 	}
 
+	public String getName(){
+		return this.name;
+	}
+	
 	private void createTrader() {
 		this.trader = new Character("Test Trader");
 		this.characters = new Hashtable<String,Character>();
@@ -29,5 +33,6 @@ public class TestTown {
 	public Character getTrader(){
 		return this.trader;
 	}
+	
 
 }
