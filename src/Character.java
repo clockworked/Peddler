@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class Character {
 	private ArrayList<ItemStack> inventory;
 	public String name;
+	public Town town;
 	
-	public Character(String Name){
-		this.name = Name;
+	public Character(String name, Town town) {
+		this.name = name;
+		this.town = town;
 		inventory = new ArrayList<ItemStack>();
 	}
 	

@@ -1,8 +1,8 @@
 
 public class Player extends Character {
 
-	public Player(String Name) {
-		super(Name);
+	public Player(String name, Town town) {
+		super(name, town);
 	}
 
 }

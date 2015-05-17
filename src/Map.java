@@ -19,13 +19,8 @@ public class Map {
     height = DEFAULT_HEIGHT;
     townsByLocation = new Hashtable<Point, Town>();
     for (int i=1; i<=NUM_TOWNS; i++) {
-      Point p=new Point();
-      Town t=null;
-      do {
-        p.x = RNG.nextInt(width);
-        p.y = RNG.nextInt(height);
-        t = new Town(String.format("Town %d", i), p.x, p.y);
-      } while (townsByLocation.containsKey(p));
+      Point p = findEmptyTile();
+      Town t = new Town(String.format("Town %d", i), p.x, p.y);
       towns.add(t);
       townsByLocation.put(p, t);
       game.addPanel(t.name, new TownMenu(game, t));
@@ -69,5 +64,15 @@ public class Map {
       }
       if (!connectedNodes.contains(t1)) System.out.println(t1);
     }
+  }
+  
+  // TODO: check if all tiles used up
+  public Point findEmptyTile() {
+    Point p=new Point();
+    do {
+      p.x = RNG.nextInt(width);
+      p.y = RNG.nextInt(height);
+    } while (townsByLocation.containsKey(p));
+    return p;
   }
 }

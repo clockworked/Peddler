@@ -1,14 +1,11 @@
 import java.util.Hashtable;
 
-public class TestTown {
-	public String name;
-	public int x, y;
-	private Hashtable<String,Character> characters;
+public class TestTown extends Town {
 	private Character trader;
 	private Character bartender;
-	
 
-	public TestTown() {
+	public TestTown(int x, int y) {
+	  super("Test Town", x, y);
 		createTrader();
 	}
 
@@ -17,7 +14,7 @@ public class TestTown {
 	}
 	
 	private void createTrader() {
-		this.trader = new Character("Test Trader");
+		this.trader = new Character("Test Trader", this);
 		this.characters = new Hashtable<String,Character>();
 		Commodity ironOre = new Commodity("Iron Ore", 15);
 		this.trader.addStack(new ItemStack(ironOre, 100, "Poor"));

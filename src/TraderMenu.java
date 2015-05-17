@@ -30,7 +30,6 @@ public class TraderMenu extends JPanel implements ActionListener {
 	private int inventoryBufferSize,inventoryWidth,inventoryHeight;
 	private TestTown currentTown;
 
-
 	public TraderMenu(Game game) {
 		this.game = game;
 		this.currentTown = game.getCurrentTown();

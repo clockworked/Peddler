@@ -1,3 +1,4 @@
+import java.awt.Point;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
@@ -23,8 +24,9 @@ public class Game extends JFrame {
     setSize(WIDTH, HEIGHT);
     setVisible(true);
     panels = new HashMap<String, JPanel>();
-	this.currentTown = new TestTown();			// For testing purposes, we're always in the same town.
     map = new Map(this);
+    Point p = map.findEmptyTile();
+	  this.currentTown = new TestTown(p.x, p.y);			// For testing purposes, we're always in the same town.
     mapMenu = new MapMenu(this, map);
     traderMenu = new TraderMenu(this);
     // TODO: make "New Game" Feature that asks for player name.
@@ -39,7 +41,7 @@ public class Game extends JFrame {
   
   // Creates the Player Character. Currently using for testing inventory
   public void playerCreation() {
-	  player = new Player("JackJohn");
+	  player = new Player("JackJohn", this.currentTown);
 	  Commodity potatoes = new Commodity("Potatoes", 15);
 	  player.addStack(new ItemStack(potatoes, 100, "Average"));
 	  Commodity furs = new Commodity("Furs", 50);

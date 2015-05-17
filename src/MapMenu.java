@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
 
 public class MapMenu extends JPanel {
   private Game game;
@@ -55,6 +56,10 @@ public class MapMenu extends JPanel {
       final MapMenu mm = this;
       final Town t = map.townsByLocation.get(p);
       final JLabel b = new JLabel(new ImageIcon("node.png"));
+      b.setBorder(BorderFactory.createCompoundBorder(
+        BorderFactory.createLineBorder(Color.DARK_GRAY, 3),
+        BorderFactory.createLineBorder(Color.LIGHT_GRAY, 3)
+      ));
       b.setHorizontalTextPosition(SwingConstants.CENTER);
       b.setVerticalTextPosition(SwingConstants.BOTTOM);
       b.addMouseListener(new MouseAdapter() {

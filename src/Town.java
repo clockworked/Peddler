@@ -1,5 +1,9 @@
+import java.util.Hashtable;
+
 public class Town {
   public String name;
+  public Hashtable<String,Character> characters;
+  
   public int x, y;
 
   
