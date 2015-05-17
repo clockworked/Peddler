@@ -35,7 +35,7 @@ public class MapMenu extends JPanel {
     setLayout(new BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
     JLabel caption = new JLabel("Select a town:");
     add(caption);
-    townsGrid = new TownsGrid(map.roads, townButtons);
+    townsGrid = new TownsGrid(game, map.roads, townButtons);
     townsGrid.setLayout(new GridLayout(map.height, map.width, 0, 0));
     townsGrid.tiles = new JPanel[map.width][map.height];
     for (int y=0; y<map.height; y++) {
@@ -71,6 +71,7 @@ public class MapMenu extends JPanel {
           } else {
             if (map.roadExists(game.player.town, t)) {
               game.player.town = t;
+              townsGrid.repaint();
             }
           }
         }

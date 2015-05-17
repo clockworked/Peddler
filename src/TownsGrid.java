@@ -11,10 +11,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class TownsGrid extends JPanel {
+  private final Game game;
   private ArrayList<Road> roads;
   private Hashtable<Town, JLabel> townButtons;
   public JPanel[][] tiles;
-  public TownsGrid(ArrayList<Road> roads, Hashtable<Town, JLabel> townButtons) {
+  
+  public TownsGrid(Game game, ArrayList<Road> roads, Hashtable<Town, JLabel> townButtons) {
+    this.game = game;
     this.roads = roads;
     this.townButtons = townButtons;
   }
@@ -32,7 +35,11 @@ public class TownsGrid extends JPanel {
       int x2 = t2.getX() + t2.getWidth()/2;
       int y2 = t2.getY() + townButtons.get(r.t2).getY() + townButtons.get(r.t2).getHeight()/2;
       //int y2 = t2.getY() + t2.getHeight()/2;
-      g2.setColor(Color.BLACK);
+      if (game.player.town == r.t1 || game.player.town == r.t2) {
+        g2.setColor(Color.MAGENTA);
+      } else {
+        g2.setColor(Color.BLACK);
+      }
       g2.setStroke(new BasicStroke(4));
       g2.drawLine(x1, y1, x2, y2);
     }
