@@ -11,7 +11,9 @@ public class Map {
   private final int DEFAULT_WIDTH = 10, DEFAULT_HEIGHT = 7;
   public int width, height;
   private Random RNG;
+  private Game game;
   public Map(Game game) {
+    this.game = game;
     RNG = new Random();
     towns = new ArrayList<Town>();
     roads = new ArrayList<Road>();
@@ -21,49 +23,46 @@ public class Map {
     for (int i=1; i<=NUM_TOWNS; i++) {
       Point p = findEmptyTile();
       Town t = new Town(String.format("Town %d", i), p.x, p.y);
-      towns.add(t);
-      townsByLocation.put(p, t);
-      game.addPanel(t.name, new TownMenu(game, t));
+      addTown(t);
     }
-
     addRoads();
   }
   public void addRoads() {
-    double roadChance = 1;
     ArrayList<Town> connectedNodes = new ArrayList<Town>();
     connectedNodes.add(towns.get(RNG.nextInt(towns.size())));
-    for (Town t1 : towns) {
-      for (Town t2: towns) {
-        if (t1 != t2) { 
-          Road r = new Road(t1, t2);
-          boolean roadExists = false;
-          for (Road r2 : roads) {
-            if (r.equals(r2)) {
-              roadExists = true;
-              break;
-            }
-          }
-          if (!roadExists) {
-            boolean crossesRoad = false;
-            for (Road r2: roads) {
-              if (!r.sharesEndpoint(r2)) {// && r.intersects(r2)) {
-                crossesRoad = true;
-              }
-            }
-            if (RNG.nextDouble() < roadChance) {
-              roads.add(r);
-              if (connectedNodes.contains(t2) && !connectedNodes.contains(t1)) {
-                connectedNodes.add(t1);
-              }
-              if (connectedNodes.contains(t1) && !connectedNodes.contains(t2)) { 
-                connectedNodes.add(t2);
-              }
-            }
-          }
+    for (Town t : towns) {
+      connectNode(t);
+    }
+  }
+  
+  private void connectNode(Town t) {
+    if (towns.size() == 1) {
+      return;
+    }
+    while (true) {
+      Town t2 = towns.get(RNG.nextInt(towns.size()));
+      if (t != t2) {
+        if (roadExists(t, t2)) {
+          return;
+        } else {
+          roads.add(new Road(t, t2));
+          return;
         }
       }
-      if (!connectedNodes.contains(t1)) System.out.println(t1);
     }
+  }
+  
+  public boolean roadExists(Town t1, Town t2) {
+    return roadExists(new Road(t1, t2));
+  }
+  
+  public boolean roadExists(Road r) {
+    for (Road r2 : roads) {
+      if (r.equals(r2)) {
+        return true;
+      }
+    }
+    return false;
   }
   
   // TODO: check if all tiles used up
@@ -74,5 +73,14 @@ public class Map {
       p.y = RNG.nextInt(height);
     } while (townsByLocation.containsKey(p));
     return p;
+  }
+  public void addTown(Town t) {
+    towns.add(t);
+    Point p = new Point(t.x, t.y);
+    townsByLocation.put(p, t);
+    game.addPanel(t.name, new TownMenu(game, t));
+    if (towns.size() > 1) {
+      connectNode(t);
+    }
   }
 }

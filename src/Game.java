@@ -8,8 +8,8 @@ import javax.swing.JPanel;
 
 public class Game extends JFrame {
   public final int WIDTH=800, HEIGHT=600;
-  private Player player;
-  private Map map;
+  public Player player;
+  public Map map;
   private MapMenu mapMenu;
   private TraderMenu traderMenu;
   private JPanel activePanel;
@@ -26,7 +26,8 @@ public class Game extends JFrame {
     panels = new HashMap<String, JPanel>();
     map = new Map(this);
     Point p = map.findEmptyTile();
-	  this.currentTown = new TestTown(p.x, p.y);			// For testing purposes, we're always in the same town.
+	  currentTown = new TestTown(p.x, p.y);			// For testing purposes, we're always in the same town.
+	  map.addTown(currentTown);
     mapMenu = new MapMenu(this, map);
     traderMenu = new TraderMenu(this);
     // TODO: make "New Game" Feature that asks for player name.

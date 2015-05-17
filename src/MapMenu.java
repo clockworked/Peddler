@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -25,7 +26,7 @@ public class MapMenu extends JPanel {
   private Map map;
   private TownsGrid townsGrid;
   private Hashtable<Town, JLabel> townButtons;
-  public MapMenu(Game game, Map map) {
+  public MapMenu(final Game game, final Map map) {
     this.game = game;
     this.map = map;
     townButtons = new Hashtable<Town, JLabel>();
@@ -45,7 +46,7 @@ public class MapMenu extends JPanel {
         //tile.setBorder(BorderFactory.createLineBorder(new Color(0,0,0,255)));
         tile.setAlignmentX(CENTER_ALIGNMENT);
         tile.setAlignmentY(CENTER_ALIGNMENT);
-        tile.setVisible(true);
+        //tile.setVisible(true);
         townsGrid.add(tile);
       }
     }
@@ -65,10 +66,15 @@ public class MapMenu extends JPanel {
       b.addMouseListener(new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
-          mm.showTownMenu(t);
+          if (game.player.town == t) {
+            mm.showTownMenu(t);
+          } else {
+            if (map.roadExists(game.player.town, t)) {
+              game.player.town = t;
+            }
+          }
         }
       });
-      
       
       townsGrid.tiles[p.x][p.y].add(b);
       JLabel tn = new JLabel(t.name);
@@ -83,9 +89,27 @@ public class MapMenu extends JPanel {
     }
   }
   public void showTownMenu(Town t) {
-    System.out.println("hihi");
     String townName = t.name;
     game.setActivePanel(townName);
   }
-
+  
+  @Override
+  public void paint(Graphics g) {
+    for (Town t : map.towns) {
+      /* these are final for MouseAdapter weirdness */
+      JLabel b = townButtons.get(t);
+      if (game.player.town == t) {
+        b.setBorder(BorderFactory.createCompoundBorder(
+          BorderFactory.createLineBorder(new Color(128,0,128), 3),
+          BorderFactory.createLineBorder(new Color(255,0,255), 3)
+        ));
+      } else {
+        b.setBorder(BorderFactory.createCompoundBorder(
+          BorderFactory.createLineBorder(Color.DARK_GRAY, 3),
+          BorderFactory.createLineBorder(Color.LIGHT_GRAY, 3)
+        ));
+      }
+    }
+    super.paint(g);
+  }
 }
