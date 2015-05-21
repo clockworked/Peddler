@@ -70,14 +70,16 @@ public class Game extends JFrame {
   
 
   public void setActivePanel(JPanel panel) {
-    prevPanel = activePanel;
-    if (activePanel != null) {
-      getContentPane().remove(activePanel);
+    if (panel != activePanel) {
+      prevPanel = activePanel;
+      if (activePanel != null) {
+        getContentPane().remove(activePanel);
+      }
+      getContentPane().add(panel, BorderLayout.CENTER);
+      activePanel = panel;
+      pack();
+      repaint();
     }
-    getContentPane().add(panel, BorderLayout.CENTER);
-    activePanel = panel;
-    pack();
-    repaint();    
   }
 
   public void setActivePanel(String key) {
@@ -85,6 +87,7 @@ public class Game extends JFrame {
   }
   
   public void prevPanel() {
+    if (prevPanel==null) System.out.println("fux");
     setActivePanel(prevPanel);
     prevPanel = null;
   }
@@ -93,8 +96,7 @@ public class Game extends JFrame {
     panels.put(key, panel);
   }
 
-  // Before we transition to the trader window, prepare the inventory and the trader to display
-  
+  // Before we transition to the trader window, prepare the inventory and the trader to display  
   public void setTrader() {
     // TODO: Add trader so we can access their inventory.
     this.traderMenu.setPlayerInventory(player);		
