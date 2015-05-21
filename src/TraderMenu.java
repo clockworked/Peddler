@@ -30,7 +30,7 @@ public class TraderMenu extends JPanel implements ActionListener {
 	private int inventoryBufferSize,inventoryWidth,inventoryHeight;
 	private TestTown currentTown;
 
-	public TraderMenu(Game game) {
+	public TraderMenu(Game game, int width, int height) {
 		this.game = game;
 		this.currentTown = game.getCurrentTown();
 		this.previousPanels = new Stack<String>();
@@ -40,7 +40,7 @@ public class TraderMenu extends JPanel implements ActionListener {
 		this.inventoryWidth = (int) (game.WIDTH*.035);
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.setAlignmentX(RIGHT_ALIGNMENT);
-		setPreferredSize(new Dimension(game.WIDTH, game.HEIGHT));
+		setPreferredSize(new Dimension(width, height));
 		/* Create and Position Right Side Menus */
 		constructRight();
 		/* Create and Position Action Menu */

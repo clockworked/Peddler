@@ -18,12 +18,12 @@ public class TownMenu extends JPanel {
   private Player player;
   
 
-  public TownMenu(Game game, Town town) {
+  public TownMenu(Game game, Town town, int width, int height) {
     this.game = game;
     this.town = town;
     player = game.getPlayer();
     setAlignmentX(CENTER_ALIGNMENT);
-    setPreferredSize(new Dimension(game.WIDTH, game.HEIGHT));
+    setPreferredSize(new Dimension(width, height));
     add(new JLabel(town.name));
     backButton = new JButton("Back");
     backButton.addActionListener(

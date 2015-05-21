@@ -4,13 +4,19 @@ import java.util.ArrayList;
 
 public class Character {
 	private ArrayList<ItemStack> inventory;
+	public int gold; // Generic currency!
 	public String name;
 	public Town town;
 	
-	public Character(String name, Town town) {
+	public Character(String name, Town town, int gold) {
 		this.name = name;
 		this.town = town;
+    this.gold = gold;
 		inventory = new ArrayList<ItemStack>();
+	}
+	
+	public Character(String name, Town town) {
+	  this(name, town, 0);
 	}
 	
 	public ArrayList<ItemStack> getInventory() {

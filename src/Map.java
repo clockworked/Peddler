@@ -8,7 +8,7 @@ public class Map {
   public ArrayList<Town> towns;
   public ArrayList<Road> roads;
   private final int NUM_TOWNS = 4;
-  private final int DEFAULT_WIDTH = 10, DEFAULT_HEIGHT = 7;
+  private final int DEFAULT_WIDTH = 10, DEFAULT_HEIGHT = 6;
   public int width, height;
   private Random RNG;
   private Game game;
@@ -74,11 +74,13 @@ public class Map {
     } while (townsByLocation.containsKey(p));
     return p;
   }
+  
+  /* Should this be moved to Game? */
   public void addTown(Town t) {
     towns.add(t);
     Point p = new Point(t.x, t.y);
     townsByLocation.put(p, t);
-    game.addPanel(t.name, new TownMenu(game, t));
+    game.addPanel(t.name, new TownMenu(game, t, game.WIDTH, (int)(0.8*game.HEIGHT)));
     if (towns.size() > 1) {
       connectNode(t);
     }

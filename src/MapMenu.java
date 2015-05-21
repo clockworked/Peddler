@@ -26,11 +26,11 @@ public class MapMenu extends JPanel {
   private Map map;
   private TownsGrid townsGrid;
   private Hashtable<Town, JLabel> townButtons;
-  public MapMenu(final Game game, final Map map) {
+  public MapMenu(final Game game, final Map map, int width, int height) {
     this.game = game;
     this.map = map;
     townButtons = new Hashtable<Town, JLabel>();
-    setPreferredSize(new Dimension(game.WIDTH, game.HEIGHT));
+    setPreferredSize(new Dimension(width, height));
     setAlignmentX(CENTER_ALIGNMENT);
     setLayout(new BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
     JLabel caption = new JLabel("Select a town:");
