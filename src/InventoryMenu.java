@@ -1,24 +1,28 @@
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
 public class InventoryMenu extends JPanel {
   private final Game game;
+  private JTable invTable;
   public InventoryMenu (final Game game, int width, int height) {
     super();
     this.game = game;
     setAlignmentX(CENTER_ALIGNMENT);
     setPreferredSize(new Dimension(width, height));
-    
-    add(new JLabel("inventory lol"));
+    setBorder(BorderFactory.createEmptyBorder(6,6,6,6));
+    setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    JTable invTable = game.player.createInventoryTable();
+    add(new JScrollPane(invTable));
+    //add(new JLabel("inventory lol"));
     JButton closeButton = new JButton("Close");
     closeButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {

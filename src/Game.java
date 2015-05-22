@@ -67,7 +67,6 @@ public class Game extends JFrame {
   public TestTown getCurrentTown(){
 	  return this.currentTown;
   }
-  
 
   public void setActivePanel(JPanel panel) {
     if (panel != activePanel) {
