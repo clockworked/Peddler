@@ -2,17 +2,18 @@
 // TODO: Set up for multiple Traders. When Trader is clicked, pass in trader and player character to display.
 import java.awt.Dimension;
 import java.util.Stack;
+
 import javax.swing.BoxLayout;
-import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
 public class TraderMenu extends JPanel implements ActionListener {
 	private Game game;
@@ -23,12 +24,10 @@ public class TraderMenu extends JPanel implements ActionListener {
 	private JButton tradeButton;
 	private JButton talkButton;
 	private JButton backButton;
-	private JTextArea playerInventory;
-	private JTextArea traderInventory;
 	private JScrollPane playerInventoryScroller;
 	private JScrollPane traderInventoryScroller;
 	private int inventoryBufferSize,inventoryWidth,inventoryHeight;
-	private TestTown currentTown;
+	private Town currentTown;
 
 	public TraderMenu(Game game, int width, int height) {
 		this.game = game;
@@ -99,16 +98,12 @@ public class TraderMenu extends JPanel implements ActionListener {
 		inventoryPanel = new JPanel();
 		inventoryPanel.add(Box.createRigidArea(new Dimension(0,inventoryBufferSize*3)));
 		inventoryPanel.setLayout(new BoxLayout(inventoryPanel,BoxLayout.Y_AXIS));
-		playerInventory = new JTextArea();
-		playerInventory.setEditable(false);
-		playerInventory.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		playerInventoryScroller = new JScrollPane (playerInventory);
+		playerInventoryScroller = new JScrollPane (game.player.createInventoryTable());
+		inventoryPanel.add(new JLabel("Your Inventory"));
 		inventoryPanel.add(playerInventoryScroller);
 		inventoryPanel.add(Box.createRigidArea(new Dimension(0,inventoryBufferSize)));
-		traderInventory = new JTextArea();
-		traderInventory.setEditable(false);
-		traderInventory.setAlignmentX(Component.RIGHT_ALIGNMENT);
-		traderInventoryScroller = new JScrollPane (traderInventory);
+		inventoryPanel.add(new JLabel("Trader Inventory"));
+		traderInventoryScroller = new JScrollPane (currentTown.trader.createInventoryTable());
 		inventoryPanel.add(traderInventoryScroller);
 		inventoryPanel.add(Box.createRigidArea(new Dimension(0,inventoryBufferSize*3)));
 		// sizing does not work.....
@@ -117,11 +112,11 @@ public class TraderMenu extends JPanel implements ActionListener {
 
 	}
 	
-	private void backPanel(){
+	private void backPanel() {
 		changePanel(previousPanels.pop());
 	}
 	
-	private void changePanel(String s){
+	private void changePanel(String s) {
 		if ( s.equals(currentTown.getName())){
 			// TODO: This should change the active panel to the current town name
 			game.setActivePanel("Town 1");							
@@ -145,17 +140,4 @@ public class TraderMenu extends JPanel implements ActionListener {
 
 	}
 
-	public void setPlayerInventory(Player player) {
-		playerInventory.setText("Current Inventory\n\n");
-		for (ItemStack e : game.getPlayer().getInventory()) {
-			playerInventory.append(e.getQuantity() + " " + e.getQuality() + " Quality " + e.getName()+ " \t " + e.getPrice()+ " Rupees\n");
-		}
-	}
-	
-	public void setTraderInventory(Character t) {
-		traderInventory.setText("Trader Inventory\n\n");
-		for (ItemStack e : t.getInventory()) {
-			traderInventory.append(e.getQuantity() + " " + e.getQuality() + " Quality " + e.getName()+ " \t " + e.getPrice()+ " Rupees\n");
-		}
-	}
 }

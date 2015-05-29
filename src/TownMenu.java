@@ -58,7 +58,7 @@ public class TownMenu extends JPanel {
   }
   
   public void showTrader() {
-	  game.setTrader();
+    game.refreshTraderMenu();
 	  game.setActivePanel("Trader");
   }
 }

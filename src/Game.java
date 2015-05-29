@@ -95,10 +95,7 @@ public class Game extends JFrame {
     panels.put(key, panel);
   }
 
-  // Before we transition to the trader window, prepare the inventory and the trader to display  
-  public void setTrader() {
-    // TODO: Add trader so we can access their inventory.
-    this.traderMenu.setPlayerInventory(player);		
-    this.traderMenu.setTraderInventory(currentTown.getTrader());
+  public void refreshTraderMenu() {
+    traderMenu = new TraderMenu(this, WIDTH, (int)(0.8*HEIGHT));
   }
 }

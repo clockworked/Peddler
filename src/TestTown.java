@@ -1,16 +1,11 @@
 import java.util.Hashtable;
 
 public class TestTown extends Town {
-	private Character trader;
-	private Character bartender;
+	public Character bartender;
 
 	public TestTown(int x, int y) {
 	  super("Test Town", x, y);
 		createTrader();
-	}
-
-	public String getName(){
-		return this.name;
 	}
 	
 	private void createTrader() {

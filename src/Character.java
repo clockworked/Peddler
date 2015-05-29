@@ -1,9 +1,9 @@
 import java.util.ArrayList;
-
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
-// Character Class will keep name, location, and inventory information for NPCS and the PC.
+/* Character Class will keep name, location, and inventory information
+ * for NPCS and the PC. */
 
 public class Character {
 	public ArrayList<ItemStack> inventory;
