@@ -3,6 +3,7 @@ import java.awt.Point;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
+import java.util.Stack;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,14 +13,16 @@ public class Game extends JFrame {
   public final int PLAYER_CASH = 1000;
   public Player player;
   public Map map;
+  public Stack<JPanel> prevPanels;
+  public Town currentTown;
+  
   private MapMenu mapMenu;
   private TraderMenu traderMenu;
   private StatusMenu statusMenu;
   private InventoryMenu inventoryMenu;
   
-  private JPanel activePanel, prevPanel;
+  private JPanel activePanel;
   private HashMap<String, JPanel> panels;
-  private TestTown currentTown;					// Currently selected Town
   
   public static void main(String[] args) {
     Game me = new Game();
@@ -29,6 +32,7 @@ public class Game extends JFrame {
     setSize(WIDTH, HEIGHT);
     setVisible(true);
     panels = new HashMap<String, JPanel>();
+    prevPanels = new Stack<JPanel>();
     map = new Map(this);
     Point p = map.findEmptyTile();
 	  currentTown = new TestTown(p.x, p.y);			// For testing purposes, we're always in the same town.
@@ -63,14 +67,10 @@ public class Game extends JFrame {
   public Player getPlayer(){
 	  return this.player;
   }
-  
-  public TestTown getCurrentTown(){
-	  return this.currentTown;
-  }
 
   public void setActivePanel(JPanel panel) {
     if (panel != activePanel) {
-      prevPanel = activePanel;
+      prevPanels.push(activePanel);
       if (activePanel != null) {
         getContentPane().remove(activePanel);
       }
@@ -86,13 +86,19 @@ public class Game extends JFrame {
   }
   
   public void prevPanel() {
-    if (prevPanel==null) System.out.println("fux");
-    setActivePanel(prevPanel);
-    prevPanel = null;
+    if (prevPanels.size() > 0) {
+      setActivePanel(prevPanels.pop());
+    } else {
+      System.out.println("(Error: no prev panel)");
+    }
   }
   
   public void addPanel(String key, JPanel panel) {
     panels.put(key, panel);
+  }
+  
+  public JPanel getPanel(String key) {
+    return panels.get(key);
   }
 
   public void refreshTraderMenu() {

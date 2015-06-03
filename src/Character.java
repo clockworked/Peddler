@@ -30,21 +30,9 @@ public class Character {
 		inventory.add(i);
 	}
 	
+	/* JTable or InvTable? */
 	public JTable createInventoryTable() {
-	  String[][] rows = new String[inventory.size()][4];
-
-    for (int y=0; y<inventory.size(); y++) {
-      ItemStack i = inventory.get(y);
-      rows[y][0] = i.getName();
-      rows[y][1] = ""+i.getQuantity();
-      rows[y][2] = i.getQuality();
-      rows[y][3] = ""+i.getPrice();
-    }
-    Object[] colNames = {"Name", "Quantity", "Quality", "Price"};
-    JTable invTable = new JTable(rows, colNames);
-    invTable.setShowGrid(true);
-    invTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-    return invTable;
+	  return new InvTable(inventory);
 	}
 
 }
